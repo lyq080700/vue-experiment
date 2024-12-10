@@ -9,6 +9,8 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 //引入pina
 import { createPinia } from "pinia";
+//引入mock
+import "@/api/mock";
 import App from "./App.vue";
 
 const pinia = createPinia();

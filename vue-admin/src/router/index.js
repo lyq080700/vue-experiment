@@ -5,6 +5,14 @@ const routers = [
     path: "/",
     name: "Home",
     component: () => import("@/views/Home.vue"),
+    redirect: "/dashboard",
+    children: [
+      {
+        path: "dashboard",
+        name: "Dashboard",
+        component: () => import("@/views/Dashboard.vue"),
+      },
+    ],
   },
 ];
 //创建路由
