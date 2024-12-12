@@ -1,7 +1,12 @@
 <script setup>
 import { ArrowRight } from '@element-plus/icons-vue';
 import {useComponentsStore} from "@/store/components.js";
+import { useRoute, useRouter } from 'vue-router';
 const components = useComponentsStore();
+const router = useRouter();
+const loginOut = () => {
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -11,8 +16,9 @@ const components = useComponentsStore();
       <el-icon><Menu /></el-icon>
     </el-button>
     <el-breadcrumb :separator-icon="ArrowRight" class="ml-8 bread">
-      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-      <!-- <el-breadcrumb-item>Dashboard</el-breadcrumb-item> -->
+      <el-breadcrumb-item :to="{ path: '/' }">控制台
+        
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
   <div class="r-container">
@@ -21,7 +27,7 @@ const components = useComponentsStore();
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item divided>退出</el-dropdown-item>
+          <el-dropdown-item divided @click="loginOut">退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
   </el-dropdown>

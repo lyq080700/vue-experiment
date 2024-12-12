@@ -9,8 +9,8 @@
  即给组件每一个元素（以及非动态添加的子组件的根元素）加上一个data-v-xxxx的属性，样式选择器也会格式化成选择器[data-v-xxxx],这样就做到了样式隔离，
  每个组件内定义的样式只对该组件生效，避免了不同组件或页面的样式（选择器）冲突 -->
 
-<style>
-#app {
+<style scoped lang="less">
+ #app {
   width: 100%;
   height: 100%;
   overflow: hidden;

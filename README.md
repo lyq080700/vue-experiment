@@ -1,13 +1,24 @@
-# Vue 3 + Vite
+# Vue 3 + Vite + element-plus + taiwind css + mockjs + pina 状态管理工具
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+<h3> 简简单单管理系统</h3>
 
 #### 持续更新
 
-# vue3+Vite+element-plus+taiwind css +mockjs
+###### 已实现功能
 
-1. 创建 vue3 项目，搭建基础页面，菜单切换
-1. vue 动态路由实现 权限管理
+1. 管理系统基础布局，菜单标签与左侧菜单栏控制页面跳转，左侧菜单栏可折叠
+2. 菜单权限管理
+3. 登录页面，完成不同权限用户登录显示不同菜单
+
+###### 待实现
+
+1. 菜单栏永久存储
+2. 动态路由实现及路由守卫
+3. 用户登录信息授权
+
+###### 待优化
+
 1. todolist kanban
+2. 封装接口，每个服务一个文件
+3. echarts 配置全局
+4. 封装页面用到的组件

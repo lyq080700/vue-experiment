@@ -1,23 +1,45 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 //路由规则
 const routers = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: () => import("@/views/Home.vue"),
     redirect: "/dashboard",
+    meta: {
+      icon: "Histogram",
+      label: "控制台",
+    },
     children: [
       {
         path: "dashboard",
-        name: "Dashboard",
+        name: "dashboard",
         component: () => import("@/views/Dashboard.vue"),
+        meta: {
+          icon: "Histogram",
+          label: "控制台",
+        },
+      },
+      {
+        path: "diary",
+        name: "diary",
+        component: () => import("@/views/Notebook.vue"),
+        meta: {
+          icon: "Notebook",
+          label: "日记",
+        },
       },
     ],
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/Login.vue"),
   },
 ];
 //创建路由
 const router = createRouter({
-  history: createWebHashHistory(), //设置hash路由模式
+  history: createWebHistory(), //设置路由模式
   routes: routers,
 });
 

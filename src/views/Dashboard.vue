@@ -1,57 +1,54 @@
 <script setup>
-    import { ref,onMounted } from 'vue';
-    const tableData = ref([
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-    sex:'male'
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-    sex:'male'
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-    sex:'male'
-  },
-])
+import { ref,onMounted,reactive } from 'vue';
+// 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
+import * as echarts from "echarts";
+const tableData = ref([])
 const tableLabels = ref({
     date: '日期',
     name: '姓名',
     address: '地址',
     sex:'性别'
 })
-import { getTableDataApi } from '@/api/api';
+import { getTableDataApi,getTimelineDataApi,getlineChartDataApi } from '@/api/api';
+
 const getTableData = async () => {
     const res = await getTableDataApi();
     tableData.value = res.tableData
 }
+
+const activities = ref([])
+//时间线
+const getTimelineData=async ()=>{
+  const res = await getTimelineDataApi();
+  activities.value = res
+}
+//Echarts图表
+const lineChartRef = ref(null);
+const getChartsData=async ()=>{
+  const myChart = echarts.init(lineChartRef.value);
+  const res = await getlineChartDataApi();
+  const option = reactive(res);
+  myChart.setOption(option);
+  //监听容器大小变化并调整图画大小
+  const observer = new ResizeObserver((entries) => {
+        myChart.resize();
+  })
+  //容器检测
+  if(lineChartRef.value){
+    observer.observe(lineChartRef.value)
+  }
+}
+
 onMounted(() => {
     getTableData();
+    getChartsData();
+    getTimelineData();
 })
-const activities = ref([
-  {
-    content: 'Event start',
-    timestamp: '2018-04-15',
-  },
-  {
-    content: 'Approved',
-    timestamp: '2018-04-13',
-  },
-  {
-    content: 'Success',
-    timestamp: '2018-04-11',
-  },
-])
+
 </script>
 
 <template>
-<el-row :gutter="20">
+<el-row :gutter="20" class="dashboard">
     <el-col :span="10">
         <el-card class="user-card" shadow="hover">
           <div class="card-header flex flex-row justify-between">
@@ -103,12 +100,15 @@ const activities = ref([
             </el-timeline>
         </el-card>
     </el-col>
-    <el-col :span="8">sss</el-col>
-    <el-col :span="8">sss</el-col>
+    <el-col :span="16">
+      <el-card class="line-card" shadow="hover">
+        <div ref="lineChartRef" style="height: 200px;"></div>
+      </el-card>
+    </el-col>
 </el-row>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .el-card {
   border-radius: 10px;
 }
