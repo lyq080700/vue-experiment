@@ -20,7 +20,7 @@ export const useComponentsStore = defineStore("components", () => {
   }
   //删除标签
   function removeTag(tag) {
-    //判断是否存在
+    //判断是否存在并且必须保留一个
     const index = tagList.value.findIndex((item) => item.label === tag.label);
     if (index === -1 || tagList.value.length === 1) return;
     tagList.value.splice(index, 1);

@@ -19,7 +19,7 @@ const handleClose = (tag) => {
 const handleMenu = (tag) => {
     router.push(tag.path);
 }
-//组件加载时确认页面加载的菜单
+//组件重新加载时确认页面首次加载的菜单tag
 onMounted(() => {
     if(!tagList.some(item => item.label === route.name)){
         const newTag = {

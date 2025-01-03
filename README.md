@@ -1,6 +1,6 @@
-# Vue 3 + Vite + element-plus + taiwind css + mockjs + pina 状态管理工具
+# 简简单单管理系统
 
-<h3> 简简单单管理系统</h3>
+<h3>Vue 3 + Vite + element-plus + taiwind css + mockjs + pinia </h3>
 
 #### 持续更新
 

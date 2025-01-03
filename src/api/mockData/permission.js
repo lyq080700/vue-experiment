@@ -1,5 +1,5 @@
 import Mock from "mockjs";
-export const getDynamicMenu = (config) => {
+export const login = (config) => {
   const { username, password } = JSON.parse(config.body); //获取用户信息
   //先判断用户是否存在
   //在判断密码是否正确
@@ -8,6 +8,7 @@ export const getDynamicMenu = (config) => {
     return {
       code: 200,
       data: {
+        username: "admin",
         menuList: [
           {
             name: "控制台",
@@ -27,26 +28,29 @@ export const getDynamicMenu = (config) => {
             path: "/user",
             label: "user",
           },
-          {
-            name: "管理",
-            icon: "Management",
-            label: "management",
-            children: [
-              {
-                name: "日记管理",
-                icon: "Suitcase",
-                path: "/management/diary",
-                label: "diaryForManagement",
-              },
-              {
-                name: "用户管理",
-                icon: "Cloudy",
-                path: "/management/user",
-                label: "userForManagement",
-              },
-            ],
-          },
+          // {
+          //   name: "管理",
+          //   icon: "Management",
+          //   label: "management",
+          //   children: [
+          //     {
+          //       name: "日记管理",
+          //       icon: "Suitcase",
+          //       path: "/management/diary",
+          //       label: "diaryForManagement",
+          //     },
+          //     {
+          //       name: "用户管理",
+          //       icon: "Cloudy",
+          //       path: "/management/user",
+          //       label: "userForManagement",
+          //     },
+          //   ],
+          // },
         ],
+        role: "admin",
+        avatar:
+          "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
         token: Mock.Random.guid(),
         messgae: "获取成功",
       },
@@ -55,6 +59,7 @@ export const getDynamicMenu = (config) => {
     return {
       code: 200,
       data: {
+        username: "user",
         menuList: [
           {
             name: "控制台",
@@ -69,6 +74,9 @@ export const getDynamicMenu = (config) => {
             label: "diary",
           },
         ],
+        role: "user",
+        avatar:
+          "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
         messgae: "获取成功",
         token: Mock.Random.guid(),
       },

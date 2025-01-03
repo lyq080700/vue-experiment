@@ -1,10 +1,10 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { getDynamicMenuApi } from '@/api/api';
+import { login } from '@/api/api';
 import { usePermissionStore } from '@/store/permission';
 const permissionStore = usePermissionStore();
-const { setMenuList } = permissionStore;
+const { setUserInfo,addRouter } = permissionStore;
 const loginForm = reactive({
     username:'admin',
     password:'123456',
@@ -12,10 +12,9 @@ const loginForm = reactive({
 })
 const router = useRouter();
 const onSubmit = async (config) => {
-    console.log("************",config);
-    const res = await getDynamicMenuApi(config);
-    setMenuList(res.menuList);
-    console.log("************",res);
+    const res = await login(config);
+    setUserInfo(res);
+    // addRouter(router);
     router.push('/');
 }
 </script>

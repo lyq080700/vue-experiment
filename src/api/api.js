@@ -26,9 +26,9 @@ export const getlineChartDataApi = () => {
 };
 
 //获取动态菜单数据
-export const getDynamicMenuApi = (params) => {
+export const login = (params) => {
   return request({
-    url: "/permission/getDynamicMenu",
+    url: "/permission/login",
     method: "post",
     data: params,
   });

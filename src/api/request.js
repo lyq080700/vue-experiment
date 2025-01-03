@@ -8,7 +8,10 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
-    // 在发送请求之前做些什么
+    // 给后端传token
+    if (localStorage.getItem("TOKEN")) {
+      config.headers.Authorization = localStorage.getItem("TOKEN");
+    }
     return config;
   },
   function (error) {

@@ -1,12 +1,20 @@
 <script setup>
+import { reactive, ref } from 'vue';
 import { ArrowRight } from '@element-plus/icons-vue';
 import {useComponentsStore} from "@/store/components.js";
 import { useRoute, useRouter } from 'vue-router';
+import { usePermissionStore } from '@/store/permission';
 const components = useComponentsStore();
+const permissionStore = usePermissionStore();
 const router = useRouter();
 const loginOut = () => {
   router.push('/login')
+  localStorage.removeItem('TOKEN');
+  localStorage.removeItem('MENU');
+  localStorage.removeItem('USER');
 }
+//获取用户信息
+const userInfo = reactive(localStorage.getItem('USER') ? JSON.parse(localStorage.getItem('USER')) : {});
 </script>
 
 <template>
@@ -23,7 +31,7 @@ const loginOut = () => {
   </div>
   <div class="r-container">
     <el-dropdown>
-      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
+      <el-avatar :src="userInfo.avatar"/>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>个人中心</el-dropdown-item>

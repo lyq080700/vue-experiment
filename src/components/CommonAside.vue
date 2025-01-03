@@ -1,12 +1,20 @@
 
 <script setup>
-import { ref ,computed, onMounted} from 'vue';
+import { ref ,computed} from 'vue';
 import {useComponentsStore} from "@/store/components.js";
 import { useRoute, useRouter } from 'vue-router';
 import { usePermissionStore } from '@/store/permission';
-const permissionStore = usePermissionStore();
+const router = useRouter();
+const route = useRoute();
 //菜单
-const menuList = ref(permissionStore.menuList);
+const menuList = ref([]);
+const permissionStore = usePermissionStore();
+//先判断本地是否有菜单
+if(localStorage.getItem('TOKEN')){
+  menuList.value = JSON.parse(localStorage.getItem('MENU'));
+}else{
+  router.push('/login');
+}
 const noChildren = computed(() => menuList.value.filter(item => !item.children))
 const hasChildren = computed(() => menuList.value.filter(item => item.children))
 //面板折叠
@@ -14,8 +22,6 @@ const components = useComponentsStore();
 const widthAside = computed(() => components.isCollapse ? '60px' : '250px')
 const margnLeft = computed(() => components.isCollapse ? '0' : '10px')
 //切换菜单 并自动激活
-const router = useRouter();
-const route = useRoute();
 const activeMenu = computed(() => route.path)
 const {addTag} = components;
 const handleMenuClick = (item) => {
